@@ -1,5 +1,5 @@
 {
-  "name": "@vas3a/tc-uninav-react",
+  "name": "uninav-react",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/uninav-react.umd.js",
