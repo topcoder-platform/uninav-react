@@ -55,10 +55,12 @@ var __objRest = (source, exclude) => {
   const ComponentLoader = (_a) => {
     var _b = _a, {
       placeholderHtml: placeholderHtml2,
-      uniNavUrl
+      uniNavUrl,
+      children
     } = _b, props = __objRest(_b, [
       "placeholderHtml",
-      "uniNavUrl"
+      "uniNavUrl",
+      "children"
     ]);
     const loadedLib = react.useRef(false);
     const initialized = react.useRef(false);
@@ -99,12 +101,15 @@ var __objRest = (source, exclude) => {
       props.supportMeta
     ]);
     const placeholder = initialized.current ? "" : placeholderHtml2 != null ? placeholderHtml2 : "";
-    return /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsxRuntime.jsxs(
       "div",
       {
         id: elUuid.current,
         ref: elRef,
-        dangerouslySetInnerHTML: { __html: placeholder }
+        children: [
+          /* @__PURE__ */ jsxRuntime.jsx("div", { dangerouslySetInnerHTML: { __html: placeholder } }),
+          !initialized.current && children
+        ]
       }
     );
   };

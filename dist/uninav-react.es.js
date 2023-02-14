@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-import { jsx } from "react/jsx-runtime";
+import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 function loadUninavLib(url) {
   if (typeof window === "undefined" || typeof document === "undefined") {
@@ -53,10 +53,12 @@ function loadUninavLib(url) {
 const ComponentLoader = (_a) => {
   var _b = _a, {
     placeholderHtml: placeholderHtml2,
-    uniNavUrl
+    uniNavUrl,
+    children
   } = _b, props = __objRest(_b, [
     "placeholderHtml",
-    "uniNavUrl"
+    "uniNavUrl",
+    "children"
   ]);
   const loadedLib = useRef(false);
   const initialized = useRef(false);
@@ -97,12 +99,15 @@ const ComponentLoader = (_a) => {
     props.supportMeta
   ]);
   const placeholder = initialized.current ? "" : placeholderHtml2 != null ? placeholderHtml2 : "";
-  return /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxs(
     "div",
     {
       id: elUuid.current,
       ref: elRef,
-      dangerouslySetInnerHTML: { __html: placeholder }
+      children: [
+        /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: placeholder } }),
+        !initialized.current && children
+      ]
     }
   );
 };
