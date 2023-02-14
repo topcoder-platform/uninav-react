@@ -6,6 +6,7 @@ import loadUninavLib from './load-uninav-lib'
 declare let tcUniNav: TcUniNavFn
 
 export interface NavComponentProps extends NavigationAppProps {
+  children?: ReactNode
   uniNavUrl: string
 }
 
@@ -16,6 +17,7 @@ export interface ComponentLoaderProps extends NavComponentProps {
 export const ComponentLoader: FC<ComponentLoaderProps> = ({
   placeholderHtml,
   uniNavUrl,
+  children,
   ...props
 }) => {
 
@@ -69,7 +71,9 @@ export const ComponentLoader: FC<ComponentLoaderProps> = ({
     <div
       id={elUuid.current}
       ref={elRef}
-      dangerouslySetInnerHTML={{ __html: placeholder }}
-    />
+    >
+      <div dangerouslySetInnerHTML={{ __html: placeholder }} />
+      {!initialized.current && children}
+    </div>
   )
 }
