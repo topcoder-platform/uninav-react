@@ -2,11 +2,11 @@ import { type FC, type ReactNode, useEffect, useRef } from 'react';
 
 import type { NavigationAppProps, TcUniNavFn } from 'universal-navigation/types/src/main';
 import loadUninavLib from './load-uninav-lib'
+import { loader } from './loader';
 
 declare let tcUniNav: TcUniNavFn
 
 export interface NavComponentProps extends NavigationAppProps {
-  children?: ReactNode
   uniNavUrl: string
 }
 
@@ -17,7 +17,6 @@ export interface ComponentLoaderProps extends NavComponentProps {
 export const ComponentLoader: FC<ComponentLoaderProps> = ({
   placeholderHtml,
   uniNavUrl,
-  children,
   ...props
 }) => {
 
@@ -72,8 +71,11 @@ export const ComponentLoader: FC<ComponentLoaderProps> = ({
       id={elUuid.current}
       ref={elRef}
     >
-      <div dangerouslySetInnerHTML={{ __html: placeholder }} />
-      {!initialized.current && children}
+      <div
+        className="uninav-ssr-placeholder"
+        style={{position: 'relative'}}
+        dangerouslySetInnerHTML={{ __html: `<div>${placeholder}${loader}</div>` }}
+      />
     </div>
   )
 }
