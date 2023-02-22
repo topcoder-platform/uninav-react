@@ -52,15 +52,14 @@ var __objRest = (source, exclude) => {
       o.parentNode.insertBefore(i, o);
     }(window, document, "script", url, "tcUniNav");
   }
+  const loader = '<div style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;display: flex; align-items: center;justify-content: center;overflow:hidden"><svg style="display: block; height: 64px; margin: 0 auto;width: 64px" viewBox="0 0 64 64"><circle style="fill: none; stroke: #149efe; stroke-width: 2" cx="32" cy="32" r="28" id="loading-indicator-circle1"/><circle style="fill: none; stroke: #e3e4e5; stroke-width: 2" cx="32" cy="32" r="6" id="loading-indicator-circle2"/></svg></div>';
   const ComponentLoader = (_a) => {
     var _b = _a, {
       placeholderHtml: placeholderHtml2,
-      uniNavUrl,
-      children
+      uniNavUrl
     } = _b, props = __objRest(_b, [
       "placeholderHtml",
-      "uniNavUrl",
-      "children"
+      "uniNavUrl"
     ]);
     const loadedLib = react.useRef(false);
     const initialized = react.useRef(false);
@@ -101,15 +100,19 @@ var __objRest = (source, exclude) => {
       props.supportMeta
     ]);
     const placeholder = initialized.current ? "" : placeholderHtml2 != null ? placeholderHtml2 : "";
-    return /* @__PURE__ */ jsxRuntime.jsxs(
+    return /* @__PURE__ */ jsxRuntime.jsx(
       "div",
       {
         id: elUuid.current,
         ref: elRef,
-        children: [
-          /* @__PURE__ */ jsxRuntime.jsx("div", { dangerouslySetInnerHTML: { __html: placeholder } }),
-          !initialized.current && children
-        ]
+        children: /* @__PURE__ */ jsxRuntime.jsx(
+          "div",
+          {
+            className: "uninav-ssr-placeholder",
+            style: { position: "relative" },
+            dangerouslySetInnerHTML: { __html: `<div>${placeholder}${loader}</div>` }
+          }
+        )
       }
     );
   };

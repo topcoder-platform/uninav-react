@@ -1,6 +1,6 @@
 {
   "name": "uninav-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "./dist/uninav-react.umd.js",
   "module": "./dist/uninav-react.es.js",
